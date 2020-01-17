@@ -1,0 +1,198 @@
+@charset "UTF-8";
+/* Default */
+*, ::before, ::after { 
+    margin: 0; padding: 0; 
+    box-sizing: border-box; 
+    font-size: 16px; color: #202020; 
+    font-family: NanumSquare, NanumGothic, sans-serif;
+}
+
+.background {
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-image: url(background.jpg);
+    background-size: cover;
+    background-position: center 50%;
+    background-repeat: no-repeat;
+}
+.background::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+
+/* Form */
+
+#login-form {
+    max-width: 768px;  height: 450px; 
+    min-width: 400px;
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 40px 20px;
+    overflow: hidden; 
+    background-color: #fff; 
+    border-radius: 5px;
+    box-shadow: 0 0 10px 5px #00000010;
+    text-align: center;
+}
+
+
+/* Text Gradient 예제 */
+/*
+    background 로 gradient를 준 다음, 배경을 background-clip을 통해
+    텍스트 기준으로 자르면 된다.
+*/
+
+#login-form h1 {
+    font-size: 2.3em;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 40px;
+    display: inline-block;
+    background: linear-gradient(135deg, #e93b3b, #e93b75, #e96c3b);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#login-form .form-group {
+    text-align: left;
+    padding: 5px 10px; 
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column-reverse;
+}
+#login-form .form-group:last-of-type {
+    margin-bottom: 30px;
+}
+
+#login-form label {
+    display: inline-block;
+    position: relative;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    margin-left: 40px;
+    font-weight: 560;
+}
+
+#login-form small {
+    font-size: 0.8em;
+    color: #727272;
+}
+
+#login-form button {
+    position: relative;
+    margin: 0 10px;  cursor: pointer;
+    width: calc(100% - 20px); height: 50px;
+    border-radius: 5px; border: 1px solid #ddd;
+    color: #fff; font-weight: 600;
+    box-shadow: 0 0 10px 5px #00000010;
+    background-color: rgb(63, 62, 62);
+    overflow: hidden;
+}
+
+#login-form button::before {
+    content: '로그인';
+    color: #fff;
+    position: absolute;
+    left: 50%; top: 0;
+    width: 0; height: 50px;
+    opacity: 0;
+    line-height: 50px; text-align: center;
+    background: linear-gradient(135deg, #e93b3b, #e93b75, #e96c3b);
+    overflow: hidden; white-space: nowrap;
+}
+
+#login-form button:hover::before {
+    left: 0; width: 100%; opacity: 1;
+    transition: 0.3s;
+}
+
+
+
+
+/*
+ Input 태그
+*/
+
+#login-form input {
+    width: 100%;
+    height: 50px;
+    line-height: 40px;
+    padding: 5px 10px;
+    border-radius: 5px; 
+    border: 1px solid #ddd;
+    color: #202020;
+}
+
+
+/*
+ input의 형식이 올바르면 design-circle을 체크 표시로 만들기
+*/
+
+
+/* 밑 준비 */
+#login-form .design-circle {
+    position: absolute;
+    left: -25px; top: 50%;
+    transform: translateY(-50%);
+    width: 5px; height: 5px;
+    background-color: #ec2b3b;
+    border-radius: 50%;
+}
+
+#login-form .design-circle::before {
+    content: '';
+    position: absolute;
+    right: 0; top: 0;
+    background-color: #ec2b3b;
+    opacity: 0;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    transform: rotate(35deg);
+    transition: 0.3s;
+}
+
+#login-form .design-circle::after {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    background-color: #ec2b3b;
+    width: 5px; height: 5px;
+    left: -5px; top: -5.5px;
+    border-radius: 50%;
+    opacity: 0;
+    transform: rotate(125deg);
+    transition: 0.3s;
+}
+
+
+
+/* pattern 속성으로 정규식 검사, 올바르지 않는경우는 :valid 선택자로 확인 */
+
+
+
+
+#login-form input:valid + label .design-circle {
+    background-color: transparent;
+}
+
+#login-form input:valid + label .design-circle::before {
+    width: 15px; border-radius: 0;   opacity: 1;
+    transition: 0.5s;
+}
+
+#login-form input:valid + label .design-circle::after {
+    width: 25px; border-radius: 0; opacity: 1;
+    transition: 0.5s;
+}
+
+#login-form input:invalid {
+    border: 2px solid #e93b3b;
+}
